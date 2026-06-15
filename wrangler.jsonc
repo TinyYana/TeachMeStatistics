@@ -1,0 +1,9 @@
+{
+  // 純靜態多頁網站（index.html + chapters/*.html）：用 Cloudflare Workers 的 static assets 部署。
+  // 有這個檔，`wrangler deploy` 就會直接部署 dist，不會跑「自動設定 Vite plugin」的精靈。
+  "name": "teach-me-statistics",
+  "compatibility_date": "2026-06-15",
+  "assets": {
+    "directory": "./dist"
+  }
+}
