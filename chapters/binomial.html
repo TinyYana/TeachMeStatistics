@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二項分配 | 統計解題駕訓班</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要內容</a>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="章節導覽">
+        <div class="brand"><strong>統計解題駕訓班</strong><span>別漏掉 C(n,k)</span></div>
+        <nav class="chapter-nav">
+          <a href="/index.html" data-nav-link>首頁</a>
+          <a href="/chapters/descriptive.html" data-nav-link>描述統計</a>
+          <a href="/chapters/probability.html" data-nav-link>機率基礎</a>
+          <a href="/chapters/binomial.html" data-nav-link>二項分配</a>
+          <a href="/chapters/normal.html" data-nav-link>常態分配</a>
+        </nav>
+      </aside>
+      <header class="mobile-topbar"><strong>二項分配</strong><label>章節<select data-mobile-nav></select></label></header>
+
+      <main id="main" class="main-content">
+        <div class="content-grid">
+          <article class="article">
+            <section class="hero">
+              <span class="eyebrow">二項分配</span>
+              <h1>二項分配最怕只算到一種順序</h1>
+              <p>這章其實就卡一件事：0.3<sup>2</sup> × 0.7<sup>6</sup> 只是一種排法，不是「剛好命中 2 次」的全部。考試很愛在這裡挖洞。</p>
+              <div class="lesson-focus">
+                <span>先記這句</span>
+                <strong>固定順序只是一種排法；剛好成功 k 次要乘上 C(n,k)。</strong>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">1. 這章在解決什麼問題</span>
+              <h2>題目在問「固定做幾次後，剛好成功幾次」</h2>
+              <p>命中率 0.3，投 8 次，剛好命中 2 次。成功位置不一定在前兩球，所以要把所有位置排法都算進來。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">2. 題目特徵</span>
+              <h2>五個條件有缺，就先不要硬套</h2>
+              <ul class="compact-list">
+                <li>固定做 n 次。</li>
+                <li>每次只有成功或失敗。</li>
+                <li>成功機率 p 固定。</li>
+                <li>每次互相獨立。</li>
+                <li>問剛好成功 k 次。</li>
+              </ul>
+            </section>
+
+            <section class="section">
+              <span class="section-label">前置概念</span>
+              <h2>二項分配前，先把這幾個小坑補起來</h2>
+              <div class="two-column">
+                <div class="panel"><h3>小數與百分比</h3><p>30% 代公式時是 0.3，不是 30。最後要交卷時再轉成百分比。</p></div>
+                <div class="panel"><h3>補事件</h3><p>失敗機率 q 不是題目另外給的東西。通常就是 1 - p。</p></div>
+                <div class="panel"><h3>次方</h3><p>p<sup>k</sup> 是成功連乘，(1−p)<sup>n−k</sup> 是失敗連乘。先把次數對上。</p></div>
+                <div class="panel"><h3>組合數</h3><p>C(n,k) 不是機率，是「成功位置有幾種」。少了它，答案通常會小很多。</p></div>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">3. 最小例題</span>
+              <h2>命中率 0.3，罰球 8 次，剛好命中 2 次</h2>
+              <div class="callout">
+                <p>先算一種順序，例如 SSFFFFFF：0.3<sup>2</sup> × 0.7<sup>6</sup>。題目沒說一定前兩球進，所以還要乘 C(8, 2)。</p>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">4. 公式與符號翻譯</span>
+              <h2>公式其實是在補三件事</h2>
+              <table>
+                <thead>
+                  <tr><th>符號／概念</th><th>怎麼唸</th><th>做什麼用</th><th>為什麼用它</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th>n</th><td>唸「n」</td><td>總共做幾次（試驗次數），例：投 8 次。</td><td>要先知道總共幾次，才知道成功可以排在哪些位置。</td></tr>
+                  <tr><th>p</th><td>唸「p」，probability 的 p</td><td>每一次成功的機率，例：命中率 0.3。</td><td>二項分配要求每次成功機率都一樣，所以從頭到尾用同一個 p。</td></tr>
+                  <tr><th>q（也寫成 1 − p）</th><td>唸「q」或「1 減 p」</td><td>每一次失敗的機率。</td><td>一次只有成功或失敗，兩個加起來是 1，所以失敗不用另外給，就是 1 − p。</td></tr>
+                  <tr><th>k</th><td>唸「k」</td><td>你想問「剛好成功幾次」的那個次數。</td><td>它決定你要算的是 X 等於多少的機率。</td></tr>
+                  <tr><th>X</th><td>唸「大 X」</td><td>「成功次數」這個會變的數（隨機變數）。</td><td>用一個字母代表「成功幾次」，才能把問題寫成 P(X = k)。</td></tr>
+                  <tr><th>P(X = k)</th><td>唸「P，X 等於 k」</td><td>成功次數剛好等於 k 的機率。</td><td>P 是機率（probability）的縮寫；括號裡寫你關心的那種情況。</td></tr>
+                  <tr><th>C(n, k)</th><td>唸「C，n、k」，組合數</td><td>n 個位置裡挑 k 個當成功位置，有幾種挑法。</td><td>固定順序只算一種排法，但題目沒指定第幾次成功，要把所有成功位置都算進來，所以乘上它。</td></tr>
+                  <tr><th>p<sup>k</sup></th><td>唸「p 的 k 次方」</td><td>p 自己連乘 k 次。</td><td>成功 k 次、每次機率都是 p，連乘就是 p<sup>k</sup>；上標只是「乘幾次」的簡寫。</td></tr>
+                  <tr><th>(1−p)<sup>n−k</sup></th><td>唸「(1 減 p) 的 (n 減 k) 次方」</td><td>失敗 (n − k) 次的機率連乘。</td><td>做 n 次、成功 k 次，剩下的 n − k 次就是失敗。</td></tr>
+                  <tr><th>×</th><td>唸「乘」</td><td>把幾個機率相乘。</td><td>獨立事件「同時都發生」，就是把各自的機率乘起來。</td></tr>
+                </tbody>
+              </table>
+              <div class="formula">
+                <code>P(X = k) = C(n, k) × p<sup>k</sup> × (1−p)<sup>n−k</sup></code>
+                <span>X 是成功次數。P(X = k) 就是成功次數剛好等於 k 的機率。</span>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">5. 分步計算</span>
+              <h2>右側先算一種順序，再把排法補回來</h2>
+              <p class="section-intro">只算 p<sup>k</sup> × (1−p)<sup>n−k</sup>，其實還沒算完。那只是其中一種成功位置。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">6. 互動驗證</span>
+              <h2>看分配圖，也看單一順序有多小</h2>
+              <div data-binomial-chart></div>
+              <h3>點擊成功位置，觀察固定順序機率</h3>
+              <div data-shot-grid class="shot-grid"></div>
+              <div data-shot-output aria-live="polite"></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">7-8. 題型辨識練習與錯題診斷</span>
+              <h2>少乘 C(n,k)，這裡會直接抓出來</h2>
+              <div class="quiz-list" data-practice></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">考卷型練習</span>
+              <h2>練考題會怎麼把它包起來</h2>
+              <div class="exam-list" data-exam-drills></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">9. 本章解題模板</span>
+              <h2>考卷上看到這種題目，就照這個順序</h2>
+              <ol class="plain-steps">
+                <li>確認固定做 n 次。</li>
+                <li>確認每次只有成功或失敗。</li>
+                <li>找成功機率 p。</li>
+                <li>找成功次數 k。</li>
+                <li>算 1 - p。</li>
+                <li>算固定順序機率 p<sup>k</sup> × (1−p)<sup>n−k</sup>。</li>
+                <li>算 C(n,k)，也就是成功位置有幾種。</li>
+                <li>全部相乘。</li>
+                <li>把小數答案轉成百分比。</li>
+              </ol>
+            </section>
+          </article>
+
+          <aside class="tool-panel" aria-label="二項分配分步計算器">
+            <h2>二項分配計算器</h2>
+            <p class="tool-note">先抓 n、p、k。接著分開看：一種順序的機率是多少，成功位置又有幾種。</p>
+            <div class="field-grid">
+              <label>n 總次數<input data-binomial-n type="number" min="0" step="1" value="8" /></label>
+              <label>p 成功機率<input data-binomial-p type="number" min="0" max="1" step="0.01" value="0.3" /></label>
+              <label>k 成功次數<input data-binomial-k type="number" min="0" step="1" value="2" /></label>
+            </div>
+            <div data-binomial-output class="result-stack" aria-live="polite"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/binomial.ts"></script>
+  </body>
+</html>

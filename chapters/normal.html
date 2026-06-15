@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>常態分配 | 統計解題駕訓班</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要內容</a>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="章節導覽">
+        <div class="brand"><strong>統計解題駕訓班</strong><span>Z 只是位置</span></div>
+        <nav class="chapter-nav">
+          <a href="/index.html" data-nav-link>首頁</a>
+          <a href="/chapters/descriptive.html" data-nav-link>描述統計</a>
+          <a href="/chapters/probability.html" data-nav-link>機率基礎</a>
+          <a href="/chapters/binomial.html" data-nav-link>二項分配</a>
+          <a href="/chapters/normal.html" data-nav-link>常態分配</a>
+        </nav>
+      </aside>
+      <header class="mobile-topbar"><strong>常態分配</strong><label>章節<select data-mobile-nav></select></label></header>
+
+      <main id="main" class="main-content">
+        <div class="content-grid">
+          <article class="article">
+            <section class="hero">
+              <span class="eyebrow">常態分配</span>
+              <h1>常態分配先不要把 Z 當答案</h1>
+              <p>Z 只是位置，不是機率。先算這個分數離平均幾個標準差，再看題目要左邊、右邊，還是兩個數中間。</p>
+              <div class="lesson-focus">
+                <span>先記這句</span>
+                <strong>Z 是位置；查表或算面積後，才會得到比例。</strong>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">1. 這章在解決什麼問題</span>
+              <h2>同一個 85 分，要看它站在什麼分布裡</h2>
+              <p>平均 70、標準差 10 的 85 分，和平均 82、標準差 3 的 85 分，意思不一樣。Z 分數就是把位置統一到同一把尺。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">2. 題目特徵</span>
+              <h2>看到平均、標準差、求比例，先往常態想</h2>
+              <ul class="compact-list">
+                <li>題目給平均數與標準差。</li>
+                <li>問小於某數、大於某數或介於兩數之間的比例。</li>
+                <li>需要把原始 X 轉成 Z 分數。</li>
+              </ul>
+            </section>
+
+            <section class="section">
+              <span class="section-label">前置概念</span>
+              <h2>常態分配前，先把面積方向弄清楚</h2>
+              <div class="two-column">
+                <div class="panel"><h3>平均數</h3><p>μ 是曲線中心。X 比 μ 大就在右邊，比 μ 小就在左邊。</p></div>
+                <div class="panel"><h3>標準差</h3><p>σ 是標準尺。Z 把「差幾分」換成「差幾個標準差」。</p></div>
+                <div class="panel"><h3>累積機率</h3><p>Z 表多半給左側面積 P(Z &lt; z)。考試常故意問右側或區間。</p></div>
+                <div class="panel"><h3>補面積與相減</h3><p>大於某數用 1 減左側；介於兩數用右邊累積減左邊累積。</p></div>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">3. 最小例題</span>
+              <h2>平均 70、標準差 10，X = 85</h2>
+              <div class="callout">
+                <p>Z = (85 - 70) ÷ 10 = 1.5。意思是 85 分比平均數高 1.5 個標準差。</p>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">4. 公式與符號翻譯</span>
+              <h2>公式先翻譯，不然很容易把 Z 當機率</h2>
+              <table>
+                <thead>
+                  <tr><th>符號／概念</th><th>怎麼唸</th><th>做什麼用</th><th>為什麼用它</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th>X</th><td>唸「大 X」</td><td>你手上的原始分數或數值，例：85 分。</td><td>題目給的那個值，要先把它標準化才好比較。</td></tr>
+                  <tr><th>μ</th><td>唸「mu」（謬），希臘字母</td><td>平均數，分布的中心。</td><td>用 μ 專指「母體平均」，跟樣本平均 x̄ 分開，看到 μ 就知道在講整體。</td></tr>
+                  <tr><th>σ</th><td>唸「sigma」（西格瑪）</td><td>標準差，分布的胖瘦。</td><td>用 σ 專指母體標準差；它決定「一個標準差」有多長。</td></tr>
+                  <tr><th>X − μ</th><td>唸「X 減 mu」</td><td>這個分數比平均高或低多少。</td><td>先看跟中心差多少，正的在右邊、負的在左邊。</td></tr>
+                  <tr><th>÷ σ</th><td>唸「除以 sigma」</td><td>把「差幾分」換算成「差幾個標準差」。</td><td>除掉標準差後就沒有單位了，不管原本是分數還是身高都能查同一張表。</td></tr>
+                  <tr><th>Z</th><td>唸「大 Z」</td><td>X 離平均幾個標準差，也就是標準化後的位置。</td><td>每題的 μ、σ 都不同，先換成 Z 才能共用同一張標準常態表。</td></tr>
+                  <tr><th>P(Z &lt; z)</th><td>唸「P，Z 小於 z」</td><td>Z 落在某個值左邊的累積機率（曲線下面積）。</td><td>表給的是左側面積；問「大於」或「介於」要再用相減加工。</td></tr>
+                </tbody>
+              </table>
+              <div class="formula">
+                <code>Z = (X - μ) ÷ σ</code>
+                <span>白話：先看 X 跟平均差多少，再除以標準差，換成標準化位置。</span>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">5. 分步計算</span>
+              <h2>右側會把 Z、左側累積和最後面積分開</h2>
+              <p class="section-intro">同一個 Z，題目問小於、大於、介於，答案會不一樣。先看方向，再看面積。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">6. 互動驗證</span>
+              <h2>先看陰影，不要只盯著數字</h2>
+              <div data-normal-chart></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">7-8. 題型辨識練習與錯題診斷</span>
+              <h2>右尾和區間題，很容易差最後一步</h2>
+              <div class="quiz-list" data-practice></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">考卷型練習</span>
+              <h2>練考題會怎麼問面積</h2>
+              <div class="exam-list" data-exam-drills></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">9. 本章解題模板</span>
+              <h2>考卷上看到常態題，就照這個順序</h2>
+              <ol class="plain-steps">
+                <li>找 X、平均數 μ、標準差 σ。</li>
+                <li>用 Z = (X - μ) ÷ σ 算位置。</li>
+                <li>解讀 Z：離平均數幾個標準差，在左邊或右邊。</li>
+                <li>查左側累積機率 P(Z &lt; z)。</li>
+                <li>小於某數：直接用左側面積。</li>
+                <li>大於某數：用 1 減左側面積。</li>
+                <li>介於兩數：用右邊累積機率減左邊累積機率。</li>
+                <li>把小數轉成百分比並寫白話結論。</li>
+              </ol>
+            </section>
+          </article>
+
+          <aside class="tool-panel" aria-label="常態分配 Z 分數分步計算器">
+            <h2>常態 Z 計算器</h2>
+            <p class="tool-note">先算位置，再看題目要哪一塊面積。大於和介於都不能直接拿左側累積當答案。</p>
+            <div class="field-grid">
+              <label>平均數 μ<input data-normal-mean type="number" step="0.1" value="70" /></label>
+              <label>標準差 σ<input data-normal-sd type="number" min="0.1" step="0.1" value="10" /></label>
+              <label>X<input data-normal-x type="number" step="0.1" value="80" /></label>
+              <label>B，上限或另一個分數<input data-normal-upper type="number" step="0.1" value="90" /></label>
+            </div>
+            <label>
+              題目問的是
+              <select data-normal-mode>
+                <option value="less">小於 X</option>
+                <option value="greater">大於 X</option>
+                <option value="between">介於 X 和 B</option>
+              </select>
+            </label>
+            <div data-normal-output class="result-stack" aria-live="polite"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/normal.ts"></script>
+  </body>
+</html>

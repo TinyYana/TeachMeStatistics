@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>描述統計 | 統計解題駕訓班</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要內容</a>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="章節導覽">
+        <div class="brand"><strong>統計解題駕訓班</strong><span>先把資料看順</span></div>
+        <nav class="chapter-nav">
+          <a href="/index.html" data-nav-link>首頁</a>
+          <a href="/chapters/descriptive.html" data-nav-link>描述統計</a>
+          <a href="/chapters/probability.html" data-nav-link>機率基礎</a>
+          <a href="/chapters/binomial.html" data-nav-link>二項分配</a>
+          <a href="/chapters/normal.html" data-nav-link>常態分配</a>
+        </nav>
+      </aside>
+      <header class="mobile-topbar">
+        <strong>描述統計</strong>
+        <label>章節<select data-mobile-nav></select></label>
+      </header>
+
+      <main id="main" class="main-content">
+        <div class="content-grid">
+          <article class="article">
+            <section class="hero">
+              <span class="eyebrow">描述統計</span>
+              <h1>先把一串數字整理到看得懂</h1>
+              <p>描述統計處理的是已經給你的資料。考試通常不會問得很玄，它會要你算中心、分散，或判斷資料是不是被極端值拉走。</p>
+              <div class="lesson-focus">
+                <span>先記這句</span>
+                <strong>平均數看中心，標準差看資料通常離平均數大約多遠。</strong>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">1. 這章在解決什麼問題</span>
+              <h2>把資料整理成兩件事：中心在哪，散多開</h2>
+              <p>例如 60, 70, 70, 80, 100。平均數會被 100 拉上去一點，標準差則是在看這組資料大概離平均多遠。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">2. 題目特徵</span>
+              <h2>看到這些字，先不要想太遠</h2>
+              <ul class="compact-list">
+                <li>題目給一組既有資料。</li>
+                <li>問平均數、中位數、眾數、全距、變異數、標準差。</li>
+                <li>沒有信心水準、p-value、重複試驗成功次數。</li>
+              </ul>
+            </section>
+
+            <section class="section">
+              <span class="section-label">前置概念</span>
+              <h2>算標準差前，先確認自己沒有少這幾塊</h2>
+              <div class="two-column">
+                <div class="panel"><h3>加總與平均</h3><p>平均數不是難點，但它是後面每一個離均差的基準。平均算錯，後面會一路歪。</p></div>
+                <div class="panel"><h3>負數與平方</h3><p>離均差有正有負，直接加會抵消，所以才要平方。這一步不是裝飾。</p></div>
+                <div class="panel"><h3>平方根</h3><p>變異數平方過，單位不太好懂；開根號後回到原單位，才比較能解釋。</p></div>
+                <div class="panel"><h3>樣本與母體</h3><p>題目寫樣本就先提醒自己：分母不是 n，是 n - 1。這個很常考也很常錯。</p></div>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">3. 最小例題</span>
+              <h2>先用 60, 70, 80 看懂離均差</h2>
+              <div class="callout">
+                <p>平均數是 70。60 比平均低 10，80 比平均高 10。平方後變成 100, 0, 100，這樣差距才不會互相抵消。</p>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">4. 公式與符號翻譯</span>
+              <h2>公式先拆成人話，再代數字</h2>
+              <div class="formula"><code>平均數 = 全部加總 ÷ 資料個數</code><span>白話：把所有數字平均分配到每一筆資料。</span></div>
+              <div class="formula"><code>離均差 = 每個數字 − 平均數</code><span>白話：每個資料點比平均高多少或低多少。</span></div>
+              <div class="formula"><code>變異數 = 離均差平方和 ÷ 分母</code><span>母體分母用 N；樣本分母用 n − 1。</span></div>
+              <div class="formula"><code>標準差 = √變異數</code><span>白話：開根號後，單位回到原本的分數、金額或身高。</span></div>
+              <table>
+                <thead>
+                  <tr><th>符號／概念</th><th>怎麼唸</th><th>做什麼用</th><th>為什麼用它</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th>Σ</th><td>唸「sigma」（大寫，summation）</td><td>「全部加起來」的記號。</td><td>資料一多，用一個 Σ 代替「一個一個寫加號」，公式才不會落落長。</td></tr>
+                  <tr><th>x̄</th><td>唸「x bar」（x 上面一槓）</td><td>一組資料的平均數。</td><td>戴一槓代表「這是平均過的 x」，跟單一筆資料的 x 區分開。</td></tr>
+                  <tr><th>n</th><td>唸「n」</td><td>樣本有幾筆資料。</td><td>算平均、算分母都要用到它。</td></tr>
+                  <tr><th>N</th><td>唸「大 N」</td><td>母體全部有幾筆資料。</td><td>大寫 N 專指母體，跟樣本 n 分開，看大小寫就知道在算哪一種。</td></tr>
+                  <tr><th>x − x̄</th><td>唸「x 減 x bar」，離均差</td><td>每筆資料比平均高或低多少。</td><td>要看「分散」，得先知道每筆離中心多遠。</td></tr>
+                  <tr><th>(x − x̄)<sup>2</sup></th><td>唸「…的平方」</td><td>離均差自己乘自己。</td><td>離均差有正有負，直接加會互相抵消成 0，平方後全變正，加起來才有意義。</td></tr>
+                  <tr><th>÷ N 或 ÷ (n − 1)</th><td>唸「除以 N／除以 n 減 1」</td><td>把平方和平均掉，得到變異數。</td><td>母體除以 N；樣本除以 n − 1，因為樣本通常會低估分散，減 1 補回來。</td></tr>
+                  <tr><th>√</th><td>唸「根號」</td><td>開平方，把平方還原回去。</td><td>變異數的單位是平方過的（例如「分的平方」），開根號才會回到原本看得懂的單位。</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="section">
+              <span class="section-label">5. 分步計算</span>
+              <h2>右側計算器會把分母和每個離均差攤開</h2>
+              <p class="section-intro">可以先用預設資料看一次，再切成樣本模式。重點是看 n 和 n - 1 對答案的影響。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">6. 互動驗證</span>
+              <h2>看資料點離平均有多遠</h2>
+              <div data-descriptive-chart class="result-stack"></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">7-8. 題型辨識練習與錯題診斷</span>
+              <h2>錯了就看是哪一步歪掉</h2>
+              <div class="quiz-list" data-practice></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">考卷型練習</span>
+              <h2>練題目真的會怎麼寫</h2>
+              <div class="exam-list" data-exam-drills></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">9. 本章解題模板</span>
+              <h2>考卷上看到一組資料，就照這個順序</h2>
+              <ol class="plain-steps">
+                <li>確認題目是整理既有資料，不是推論或分配題。</li>
+                <li>先算資料個數與總和。</li>
+                <li>算平均數。</li>
+                <li>每個數字減平均數，得到離均差。</li>
+                <li>離均差平方後加總。</li>
+                <li>母體除以 N；樣本除以 n - 1。</li>
+                <li>得到變異數，再開根號得到標準差。</li>
+                <li>用一句話解讀：資料通常離平均數大約多少。</li>
+              </ol>
+            </section>
+          </article>
+
+          <aside class="tool-panel" aria-label="描述統計分步計算器">
+            <h2>標準差計算器</h2>
+            <p class="tool-note">先不要急著看最後一格。標準差真正容易錯的是離均差平方和、還有樣本分母。</p>
+            <label>
+              輸入資料，用逗號或空格分開
+              <textarea data-descriptive-input rows="4">60, 70, 70, 80, 100</textarea>
+            </label>
+            <div class="field-grid" role="radiogroup" aria-label="變異數模式">
+              <label><input type="radio" name="variance-mode" value="population" checked /> 母體：除以 N</label>
+              <label><input type="radio" name="variance-mode" value="sample" /> 樣本：除以 n - 1</label>
+            </div>
+            <div data-descriptive-output class="result-stack" aria-live="polite"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/descriptive.ts"></script>
+  </body>
+</html>

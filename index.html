@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>統計解題駕訓班</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要內容</a>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="章節導覽">
+        <div class="brand">
+          <strong>統計解題駕訓班</strong>
+          <span>先看題目在問什麼</span>
+        </div>
+        <nav class="chapter-nav">
+          <a href="/index.html" data-nav-link>首頁</a>
+          <a href="/chapters/descriptive.html" data-nav-link>描述統計</a>
+          <a href="/chapters/probability.html" data-nav-link>機率基礎</a>
+          <a href="/chapters/binomial.html" data-nav-link>二項分配</a>
+          <a href="/chapters/normal.html" data-nav-link>常態分配</a>
+        </nav>
+      </aside>
+
+      <header class="mobile-topbar">
+        <strong>統計解題駕訓班</strong>
+        <label>
+          章節
+          <select data-mobile-nav></select>
+        </label>
+      </header>
+
+      <main id="main" class="main-content">
+        <article class="article wide-article">
+          <section class="hero">
+            <span class="eyebrow">給期末考前的統計練習</span>
+            <h1>先看題型，再決定要不要套公式</h1>
+            <p>
+              這個頁面不是要把統計做成一整套闖關系統。比較像考前拿來踩煞車的地方：
+              先看題目到底是哪一型，再拆公式，最後才算。少一點花樣，多一點真的會用到的判斷。
+            </p>
+            <div class="lesson-focus">
+              <span>這版先顧好</span>
+              <strong>題型辨識、公式代入、分步計算，還有答錯時到底錯在哪一步。</strong>
+            </div>
+            <ul class="lesson-strip" aria-label="學習方式">
+              <li>看到題目先停一下，找關鍵字。</li>
+              <li>公式不要只背，至少知道每個符號在裝什麼。</li>
+              <li>錯了就回到那一步，不要整題重猜。</li>
+            </ul>
+          </section>
+
+          <section class="section" id="concept-map">
+            <span class="section-label">概念地圖</span>
+            <h2>先知道自己現在踩在哪一格</h2>
+            <p class="section-intro">
+              統計很容易學到一半變成「公式都長得很像」。點一個概念，先看它解決什麼問題、前面要會什麼、考題通常怎麼包裝。
+            </p>
+            <div data-concept-map></div>
+          </section>
+
+          <section class="section">
+            <span class="section-label">先練這個</span>
+            <h2>題型判斷器：考試卡住通常是卡在這裡</h2>
+            <p class="section-intro">
+              不是看到「平均」就一定描述統計，也不是看到「機率」就全都二項分配。選錯時會順便標出你可能被哪個字帶走。
+            </p>
+            <div data-question-type-trainer></div>
+          </section>
+
+          <section class="section">
+            <span class="section-label">建議順序</span>
+            <h2>先照這條路走，先不要貪多</h2>
+            <div class="learning-path">
+              <a class="path-row" href="/chapters/descriptive.html">
+                <span class="path-index">1</span>
+                <span><strong>描述統計</strong><span>先把一組資料整理好，標準差不要只看最後答案。</span></span>
+                <span class="path-action">先練</span>
+              </a>
+              <a class="path-row" href="/chapters/probability.html">
+                <span class="path-index">2</span>
+                <span><strong>機率基礎</strong><span>把樣本空間、補事件、獨立事件先分清楚。</span></span>
+                <span class="path-action">銜接</span>
+              </a>
+              <a class="path-row" href="/chapters/binomial.html">
+                <span class="path-index">3</span>
+                <span><strong>二項分配</strong><span>看到固定次數和剛好成功 k 次，再來處理 C(n,k)。</span></span>
+                <span class="path-action">重點</span>
+              </a>
+              <a class="path-row" href="/chapters/normal.html">
+                <span class="path-index">4</span>
+                <span><strong>常態分配</strong><span>先把 X 轉成 Z，再看題目問左邊、右邊或中間。</span></span>
+                <span class="path-action">收束</span>
+              </a>
+            </div>
+          </section>
+
+          <section class="section">
+            <span class="section-label">先切範圍</span>
+            <h2>這版先處理最容易在考卷上卡住的地方</h2>
+            <ul class="compact-list">
+              <li>概念地圖這版補滿了考試範圍：條件機率、期望值、間斷／連續、抽樣分配、t/卡方/F 臨界值都進來了，先讓你看得到全貌和先後順序。</li>
+              <li>分步計算器目前還是只做描述統計、機率、二項、常態這四個核心，其他先停在概念和題型辨識，一次全做完會膨脹到讀不完。</li>
+              <li>不考的就直接不放：貝氏、聯合邊際、卜瓦松、指數、常態近似二項，免得占版面又分心。</li>
+              <li>答題回饋和錯題診斷留著就好，等級、裝備、劇情那種會讓人分心的東西不做。</li>
+            </ul>
+          </section>
+        </article>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/home.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>機率基礎 | 統計解題駕訓班</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要內容</a>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="章節導覽">
+        <div class="brand"><strong>統計解題駕訓班</strong><span>先把分母找出來</span></div>
+        <nav class="chapter-nav">
+          <a href="/index.html" data-nav-link>首頁</a>
+          <a href="/chapters/descriptive.html" data-nav-link>描述統計</a>
+          <a href="/chapters/probability.html" data-nav-link>機率基礎</a>
+          <a href="/chapters/binomial.html" data-nav-link>二項分配</a>
+          <a href="/chapters/normal.html" data-nav-link>常態分配</a>
+        </nav>
+      </aside>
+      <header class="mobile-topbar"><strong>機率基礎</strong><label>章節<select data-mobile-nav></select></label></header>
+
+      <main id="main" class="main-content">
+        <div class="content-grid">
+          <article class="article">
+            <section class="hero">
+              <span class="eyebrow">機率基礎</span>
+              <h1>先把所有可能結果找出來</h1>
+              <p>機率題常常不是算不出來，是一開始分母就抓錯。先把樣本空間和題目要的事件圈出來，後面才有東西能算。</p>
+              <div class="lesson-focus">
+                <span>先記這句</span>
+                <strong>問「沒有發生」用 1 減掉；問「兩件事都發生」通常要乘。</strong>
+              </div>
+              <ul class="lesson-strip">
+                <li>骰子題先列出全部結果。</li>
+                <li>補事件就是原事件沒有發生。</li>
+                <li>固定順序機率會接到二項分配。</li>
+              </ul>
+            </section>
+
+            <section class="section">
+              <span class="section-label">這章在解決什麼問題</span>
+              <h2>不確定也可以算，但要先知道全部可能有哪些</h2>
+              <p>丟骰子、投籃、抽樣，每次結果都不一定一樣。可是只要分母清楚，事件也圈得出來，就能開始算。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">核心概念</span>
+              <h2>先分清楚題目到底圈了哪一塊</h2>
+              <table>
+                <tbody>
+                  <tr><th>樣本空間</th><td>所有可能結果。丟骰子就是 1, 2, 3, 4, 5, 6。</td></tr>
+                  <tr><th>事件</th><td>我們關心的結果集合。偶數就是 2, 4, 6。</td></tr>
+                  <tr><th>補事件</th><td>A 沒有發生。命中率 0.3，沒命中率就是 0.7。</td></tr>
+                  <tr><th>獨立事件</th><td>前一次結果不影響下一次結果，例如理想化的連續投籃。</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="section">
+              <span class="section-label">公式</span>
+              <h2>考前先把這三個起手式放熟</h2>
+              <div class="formula"><code>P(A) = 有利結果數 ÷ 所有可能結果數</code><span>P(A) 念成「事件 A 發生的機率」。</span></div>
+              <div class="formula"><code>P(A 的補事件) = 1 − P(A)</code><span>補事件就是 A 沒有發生，不用再重新猜一次。</span></div>
+              <div class="formula"><code>P(A 且 B) = P(A) × P(B)</code><span>這裡只用在 A 和 B 互相獨立的情況。</span></div>
+              <table>
+                <thead>
+                  <tr><th>符號／概念</th><th>怎麼唸</th><th>做什麼用</th><th>為什麼用它</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th>P(A)</th><td>唸「P，A」</td><td>事件 A 發生的機率。</td><td>P 是機率（probability）的縮寫；括號裡放你關心的那個事件。</td></tr>
+                  <tr><th>÷</th><td>唸「除」</td><td>有利結果數 ÷ 所有可能結果數。</td><td>機率就是「中意的占全部的比例」，所以是相除。</td></tr>
+                  <tr><th>1 − P(A)</th><td>唸「1 減 P A」</td><td>A 沒有發生的機率，也就是補事件。</td><td>所有可能的機率加起來是 1，所以「沒發生」＝1 減「發生」，比一個個重算快。</td></tr>
+                  <tr><th>P(A 且 B)</th><td>唸「P，A 且 B」</td><td>A 和 B 同時發生的機率。</td><td>「且」代表兩件事都要成立。</td></tr>
+                  <tr><th>×</th><td>唸「乘」</td><td>把兩個機率相乘。</td><td>只有在 A、B 互相獨立（誰先誰後都不影響對方）時，同時發生才能直接相乘。</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="section">
+              <span class="section-label">白話拆解</span>
+              <h2>骰子題先圈結果，先不要急著按計算機</h2>
+              <ol class="plain-steps">
+                <li>列出全部可能結果。</li>
+                <li>圈出題目要的結果。</li>
+                <li>用「圈到幾個 ÷ 全部幾個」算機率。</li>
+                <li>如果問沒有發生，就用 1 減掉原本機率。</li>
+                <li>如果問獨立事件都發生，就把機率相乘。</li>
+              </ol>
+            </section>
+
+            <section class="section">
+              <span class="section-label">範例</span>
+              <h2>丟骰子出現偶數</h2>
+              <div class="callout">
+                <p>偶數是 2、4、6，共 3 個結果。全部可能結果是 6 個，所以 P(偶數) = 3/6 = 0.5 = 50%。</p>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">互動區</span>
+              <h2>右側會把被算進去的結果標出來</h2>
+              <p class="section-intro">先看哪些點數被圈到，再看補事件、獨立事件和固定順序機率。這些會接到二項分配。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">小練習</span>
+              <h2>先練題目到底在問哪個事件</h2>
+              <div class="quiz-list" data-quiz></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">常見錯誤</span>
+              <h2>看到兩件事，不要反射性相加</h2>
+              <div class="mistake">
+                <p>問「A 或 B」才可能用加法；問「A 且 B」通常是在乘。這裡先只處理簡化版本，不往聯合機率和邊際機率展開。</p>
+              </div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">本章總結</span>
+              <h2>機率題先看關係，再選公式</h2>
+              <p>補事件用 1 減掉原機率，獨立事件同時發生用乘法。固定順序機率是二項分配的前一半。</p>
+            </section>
+          </article>
+
+          <aside class="tool-panel" aria-label="機率互動器">
+            <h2>機率互動器</h2>
+            <p class="tool-note">這裡先做小範圍計算。重點不是按出答案，是看清楚哪些結果真的被算進去。</p>
+            <label>骰子事件<select data-dice-event><option value="even">偶數</option><option value="one">出現 1</option><option value="greaterThan4">大於 4</option><option value="lessOrEqual3">小於等於 3</option></select></label>
+            <div data-dice-output class="result-stack" aria-live="polite"></div>
+            <label>事件機率 P(A)<input data-complement-input type="number" min="0" max="1" step="0.01" value="0.3" /></label>
+            <div data-complement-output aria-live="polite"></div>
+            <div class="field-grid">
+              <label>P(A)<input data-independent-a type="number" min="0" max="1" step="0.01" value="0.3" /></label>
+              <label>P(B)<input data-independent-b type="number" min="0" max="1" step="0.01" value="0.3" /></label>
+            </div>
+            <div data-independent-output aria-live="polite"></div>
+            <label>成功機率 p<input data-sequence-p type="number" min="0" max="1" step="0.01" value="0.3" /></label>
+            <label>固定順序，S 是成功、F 是失敗<input data-sequence-text value="SSFFFFFF" /></label>
+            <div data-sequence-output aria-live="polite"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/probability.ts"></script>
+  </body>
+</html>
