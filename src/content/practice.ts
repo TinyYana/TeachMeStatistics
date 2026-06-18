@@ -1,5 +1,7 @@
 import type { QuestionType } from "./questionTypes";
 
+export type PracticeChapter = "descriptive" | "probability" | "binomial" | "normal";
+
 export interface PracticeOption {
   label: string;
   diagnosticId?: string;
@@ -7,7 +9,7 @@ export interface PracticeOption {
 
 export interface PracticeQuestion {
   id: string;
-  chapter: "descriptive" | "binomial" | "normal";
+  chapter: PracticeChapter;
   prompt: string;
   answerIndex: number;
   successFeedback: string;
@@ -16,7 +18,7 @@ export interface PracticeQuestion {
 
 export interface ExamDrill {
   id: string;
-  chapter: PracticeQuestion["chapter"];
+  chapter: PracticeChapter;
   title: string;
   prompt: string;
   formula: string;
@@ -61,6 +63,56 @@ export const practiceSets: Record<PracticeQuestion["chapter"], PracticeQuestion[
         { label: "描述統計" },
         { label: "二項分配", diagnosticId: "wrong-question-type" },
         { label: "假設檢定", diagnosticId: "wrong-question-type" }
+      ]
+    }
+  ],
+  probability: [
+    {
+      id: "probability-dice-basic",
+      chapter: "probability",
+      prompt: "丟一顆公平骰子，出現偶數的機率是多少？",
+      answerIndex: 0,
+      successFeedback: "對，偶數是 2、4、6，共 3 個結果，所以 3/6 = 0.5。",
+      options: [
+        { label: "3/6 = 0.5" },
+        { label: "2/6", diagnosticId: "wrong-sample-space" },
+        { label: "1/6", diagnosticId: "wrong-sample-space" }
+      ]
+    },
+    {
+      id: "probability-conditional-denominator",
+      chapter: "probability",
+      prompt: "全班 40 人，修統計 12 人，其中 9 人通過。已知某人修統計，通過機率是多少？",
+      answerIndex: 1,
+      successFeedback: "對，條件已經縮成修統計的 12 人，所以是 9/12 = 0.75。",
+      options: [
+        { label: "9/40", diagnosticId: "conditional-denominator" },
+        { label: "9/12" },
+        { label: "12/40", diagnosticId: "wrong-question-type" }
+      ]
+    },
+    {
+      id: "probability-independence-check",
+      chapter: "probability",
+      prompt: "P(A)=0.3，P(B)=0.5，P(A 且 B)=0.15。A 和 B 是否可視為獨立？",
+      answerIndex: 0,
+      successFeedback: "對，P(A)P(B)=0.3×0.5=0.15，和 P(A 且 B) 一樣。",
+      options: [
+        { label: "可以，因為 P(A 且 B)=P(A)P(B)" },
+        { label: "不行，因為 0.3 和 0.5 不一樣", diagnosticId: "independence-conditional" },
+        { label: "不行，因為兩個事件同時出現就一定相關", diagnosticId: "independence-conditional" }
+      ]
+    },
+    {
+      id: "probability-function-expected-value",
+      chapter: "probability",
+      prompt: "X=0,1,2；P(X)=0.2,0.5,0.3。E(X) 是多少？",
+      answerIndex: 2,
+      successFeedback: "對，E(X)=0×0.2+1×0.5+2×0.3=1.1。",
+      options: [
+        { label: "(0+1+2)/3 = 1", diagnosticId: "expected-value-weights" },
+        { label: "0.2+0.5+0.3 = 1", diagnosticId: "expected-value-weights" },
+        { label: "1.1" }
       ]
     }
   ],
@@ -165,6 +217,38 @@ export const examDrills: Record<PracticeQuestion["chapter"], ExamDrill[]> = {
       examNote: "有極端值時，平均數會被拉動；中位數通常比較穩。"
     }
   ],
+  probability: [
+    {
+      id: "exam-probability-complement",
+      chapter: "probability",
+      title: "4.1 基本機率與補事件",
+      prompt: "一顆公平骰子丟一次，求出現大於 4 的機率，以及沒有出現大於 4 的機率。",
+      formula: "P(A)=有利結果數÷所有可能結果數；P(A 的補事件)=1−P(A)",
+      substitution: "A={5,6}，P(A)=2/6=1/3；1−1/3=2/3",
+      answer: "出現大於 4 的機率 = 1/3；沒有出現大於 4 的機率 = 2/3。",
+      examNote: "4.1 常見坑是分母抓錯；骰子一次的樣本空間就是 6 個結果。"
+    },
+    {
+      id: "exam-conditional-probability",
+      chapter: "probability",
+      title: "4.2 條件機率",
+      prompt: "全班 40 人，修統計 12 人，其中 9 人通過。已知抽到的人修統計，求他通過的機率。",
+      formula: "P(通過 | 修統計)=P(通過且修統計)÷P(修統計)",
+      substitution: "P(通過 | 修統計)=(9/40)÷(12/40)=9/12",
+      answer: "P(通過 | 修統計)=0.75=75%。",
+      examNote: "看到「已知」就先換分母；這題分母不是全班 40 人，而是修統計的 12 人。"
+    },
+    {
+      id: "exam-probability-function",
+      chapter: "probability",
+      title: "4.4 機率函數與特徵值",
+      prompt: "隨機變數 X 的機率函數為 P(X=0)=0.2，P(X=1)=0.5，P(X=2)=0.3。求 E(X)、Var(X) 與標準差。",
+      formula: "E(X)=ΣxP(x)；Var(X)=E(X²)−[E(X)]²",
+      substitution: "E(X)=0×0.2+1×0.5+2×0.3=1.1；E(X²)=0²×0.2+1²×0.5+2²×0.3=1.7",
+      answer: "Var(X)=1.7−1.1²=0.49；標準差=√0.49=0.7。",
+      examNote: "4.4 不是把 X 值直接平均；每個 X 要照自己的機率加權。"
+    }
+  ],
   binomial: [
     {
       id: "exam-binomial-exact",
@@ -207,6 +291,16 @@ export const examDrills: Record<PracticeQuestion["chapter"], ExamDrill[]> = {
       substitution: "Z = (80 − 70) ÷ 10 = 1；1 − P(Z < 1)",
       answer: "1 - 0.8413 = 0.1587 = 15.87%",
       examNote: "題目問大於時，要記得用 1 減左側累積機率。"
+    },
+    {
+      id: "exam-normal-between",
+      chapter: "normal",
+      title: "介於兩分數之間",
+      prompt: "某測驗分數近似常態，平均 70，標準差 10。求 80 到 90 分之間的比例。",
+      formula: "P(80 < X < 90)=P(Z < z₂)−P(Z < z₁)",
+      substitution: "z₁=(80−70)÷10=1；z₂=(90−70)÷10=2；P(Z<2)−P(Z<1)",
+      answer: "0.9772 - 0.8413 = 0.1359 = 13.59%。",
+      examNote: "5.3 區間題不要只查右邊界；要用右邊累積面積減左邊累積面積。"
     }
   ]
 };

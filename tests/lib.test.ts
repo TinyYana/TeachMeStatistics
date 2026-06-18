@@ -6,6 +6,10 @@ import { binomialProbability, combination, factorial } from "../src/lib/binomial
 import { summarize } from "../src/lib/descriptive";
 import { fixedSequenceProbability } from "../src/lib/binomial";
 import { normalArea, standardNormalCdf, zScore } from "../src/lib/normal";
+import {
+  summarizeConditionalIndependence,
+  summarizeProbabilityDistribution
+} from "../src/lib/probability";
 
 describe("descriptive statistics", () => {
   it("summarizes mean, median, mode and range", () => {
@@ -72,11 +76,32 @@ describe("normal distribution helpers", () => {
   });
 });
 
+describe("probability helpers", () => {
+  it("calculates conditional probability and independence", () => {
+    const result = summarizeConditionalIndependence(0.3, 0.5, 0.15);
+
+    expect(result.conditionalProbability).toBeCloseTo(0.3, 8);
+    expect(result.expectedIntersectionIfIndependent).toBeCloseTo(0.15, 8);
+    expect(result.isIndependent).toBe(true);
+  });
+
+  it("summarizes probability functions", () => {
+    const result = summarizeProbabilityDistribution([0, 1, 2], [0.2, 0.5, 0.3]);
+
+    expect(result.probabilitySum).toBeCloseTo(1, 8);
+    expect(result.expectedValue).toBeCloseTo(1.1, 8);
+    expect(result.expectedSquaredValue).toBeCloseTo(1.7, 8);
+    expect(result.variance).toBeCloseTo(0.49, 8);
+    expect(result.standardDeviation).toBeCloseTo(0.7, 8);
+  });
+});
+
 describe("question type trainer content", () => {
-  it("includes the required six answer choices", () => {
+  it("includes the required answer choices", () => {
     expect(questionTypeOptions).toEqual([
       "描述統計",
       "機率基礎",
+      "機率函數",
       "二項分配",
       "常態分配",
       "信賴區間",
@@ -96,8 +121,8 @@ describe("question type trainer content", () => {
 });
 
 describe("diagnostic content", () => {
-  it("covers the ten MVP mistake types with complete guidance", () => {
-    expect(diagnostics).toHaveLength(10);
+  it("covers the mistake types with complete guidance", () => {
+    expect(diagnostics).toHaveLength(14);
     for (const diagnostic of diagnostics) {
       expect(diagnostic.title.length).toBeGreaterThan(0);
       expect(diagnostic.reason.length).toBeGreaterThan(0);
@@ -110,11 +135,13 @@ describe("diagnostic content", () => {
 describe("exam drill content", () => {
   it("adds exam-style formula practice for each MVP chapter", () => {
     expect(examDrills.descriptive.length).toBeGreaterThanOrEqual(2);
+    expect(examDrills.probability.length).toBeGreaterThanOrEqual(3);
     expect(examDrills.binomial.length).toBeGreaterThanOrEqual(2);
-    expect(examDrills.normal.length).toBeGreaterThanOrEqual(2);
+    expect(examDrills.normal.length).toBeGreaterThanOrEqual(3);
 
     for (const drill of [
       ...examDrills.descriptive,
+      ...examDrills.probability,
       ...examDrills.binomial,
       ...examDrills.normal
     ]) {

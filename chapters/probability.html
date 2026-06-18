@@ -3,45 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>機率基礎 | 統計解題駕訓班</title>
+    <title>機率與機率函數 | 統計解題駕訓班</title>
   </head>
   <body>
     <a class="skip-link" href="#main">跳到主要內容</a>
     <div class="site-shell">
       <aside class="sidebar" aria-label="章節導覽">
-        <div class="brand"><strong>統計解題駕訓班</strong><span>先把分母找出來</span></div>
+        <div class="brand"><strong>統計解題駕訓班</strong><span>分母、條件、機率表</span></div>
         <nav class="chapter-nav">
           <a href="/index.html" data-nav-link>首頁</a>
           <a href="/chapters/descriptive.html" data-nav-link>描述統計</a>
-          <a href="/chapters/probability.html" data-nav-link>機率基礎</a>
+          <a href="/chapters/probability.html" data-nav-link>機率與函數</a>
           <a href="/chapters/binomial.html" data-nav-link>二項分配</a>
           <a href="/chapters/normal.html" data-nav-link>常態分配</a>
         </nav>
       </aside>
-      <header class="mobile-topbar"><strong>機率基礎</strong><label>章節<select data-mobile-nav></select></label></header>
+      <header class="mobile-topbar"><strong>機率與機率函數</strong><label>章節<select data-mobile-nav></select></label></header>
 
       <main id="main" class="main-content">
         <div class="content-grid">
           <article class="article">
             <section class="hero">
-              <span class="eyebrow">機率基礎</span>
-              <h1>先把所有可能結果找出來</h1>
-              <p>機率題常常不是算不出來，是一開始分母就抓錯。先把樣本空間和題目要的事件圈出來，後面才有東西能算。</p>
+              <span class="eyebrow">4.1 / 4.2 / 4.4 機率與機率函數</span>
+              <h1>先找分母，再看條件有沒有縮小範圍</h1>
+              <p>機率題常常不是算不出來，是一開始把「全部是誰」抓錯。先圈樣本空間，再看題目有沒有加條件；如果給的是 P(X) 表，就改算期望值和變異數。</p>
               <div class="lesson-focus">
-                <span>先記這句</span>
-                <strong>問「沒有發生」用 1 減掉；問「兩件事都發生」通常要乘。</strong>
+                <span>考前主線</span>
+                <strong>4.1 抓樣本空間，4.2 換條件分母，4.4 用機率函數算 E(X) 和 Var(X)。</strong>
               </div>
               <ul class="lesson-strip">
-                <li>骰子題先列出全部結果。</li>
-                <li>補事件就是原事件沒有發生。</li>
-                <li>固定順序機率會接到二項分配。</li>
+                <li>基本機率：有利結果數 ÷ 全部可能結果數。</li>
+                <li>條件機率：已知 B 後，分母改成 B。</li>
+                <li>機率函數：P(X) 加總要等於 1，再算特徵值。</li>
               </ul>
             </section>
 
             <section class="section">
               <span class="section-label">這章在解決什麼問題</span>
-              <h2>不確定也可以算，但要先知道全部可能有哪些</h2>
-              <p>丟骰子、投籃、抽樣，每次結果都不一定一樣。可是只要分母清楚，事件也圈得出來，就能開始算。</p>
+              <h2>不確定也可以算，但每一題的分母不一定相同</h2>
+              <p>丟骰子、投籃、抽樣，每次結果都不一定一樣。可是只要知道全部可能、已知條件、還有每個 X 值的機率，就能把題目拆成可算的幾步。</p>
             </section>
 
             <section class="section">
@@ -52,7 +52,10 @@
                   <tr><th>樣本空間</th><td>所有可能結果。丟骰子就是 1, 2, 3, 4, 5, 6。</td></tr>
                   <tr><th>事件</th><td>我們關心的結果集合。偶數就是 2, 4, 6。</td></tr>
                   <tr><th>補事件</th><td>A 沒有發生。命中率 0.3，沒命中率就是 0.7。</td></tr>
+                  <tr><th>條件機率</th><td>已知 B 發生後，A 發生的機率。分母會從全部縮小成 B。</td></tr>
                   <tr><th>獨立事件</th><td>前一次結果不影響下一次結果，例如理想化的連續投籃。</td></tr>
+                  <tr><th>機率函數</th><td>列出每個 X 值和對應的 P(X)，例如成功次數 0、1、2 各自的機率。</td></tr>
+                  <tr><th>特徵值</th><td>期望值、變異數、標準差，幫你用幾個數字描述這個機率函數。</td></tr>
                 </tbody>
               </table>
             </section>
@@ -62,7 +65,10 @@
               <h2>考前先把這三個起手式放熟</h2>
               <div class="formula"><code>P(A) = 有利結果數 ÷ 所有可能結果數</code><span>P(A) 念成「事件 A 發生的機率」。</span></div>
               <div class="formula"><code>P(A 的補事件) = 1 − P(A)</code><span>補事件就是 A 沒有發生，不用再重新猜一次。</span></div>
+              <div class="formula"><code>P(A|B) = P(A 且 B) ÷ P(B)</code><span>已知 B 後，分母改成 B。</span></div>
               <div class="formula"><code>P(A 且 B) = P(A) × P(B)</code><span>這裡只用在 A 和 B 互相獨立的情況。</span></div>
+              <div class="formula"><code>E(X) = ΣxP(x)</code><span>期望值是照機率加權後的長期平均。</span></div>
+              <div class="formula"><code>Var(X) = E(X²) − [E(X)]²</code><span>變異數描述結果通常離期望值多遠。</span></div>
               <table>
                 <thead>
                   <tr><th>符號／概念</th><th>怎麼唸</th><th>做什麼用</th><th>為什麼用它</th></tr>
@@ -71,22 +77,55 @@
                   <tr><th>P(A)</th><td>唸「P，A」</td><td>事件 A 發生的機率。</td><td>P 是機率（probability）的縮寫；括號裡放你關心的那個事件。</td></tr>
                   <tr><th>÷</th><td>唸「除」</td><td>有利結果數 ÷ 所有可能結果數。</td><td>機率就是「中意的占全部的比例」，所以是相除。</td></tr>
                   <tr><th>1 − P(A)</th><td>唸「1 減 P A」</td><td>A 沒有發生的機率，也就是補事件。</td><td>所有可能的機率加起來是 1，所以「沒發生」＝1 減「發生」，比一個個重算快。</td></tr>
+                  <tr><th>P(A|B)</th><td>唸「B 條件下 A 的機率」</td><td>已知 B 發生後，A 發生的機率。</td><td>題目說「已知」「在某群人中」時，分母不再是全部，而是條件 B。</td></tr>
                   <tr><th>P(A 且 B)</th><td>唸「P，A 且 B」</td><td>A 和 B 同時發生的機率。</td><td>「且」代表兩件事都要成立。</td></tr>
                   <tr><th>×</th><td>唸「乘」</td><td>把兩個機率相乘。</td><td>只有在 A、B 互相獨立（誰先誰後都不影響對方）時，同時發生才能直接相乘。</td></tr>
+                  <tr><th>P(X=x)</th><td>唸「X 等於 x 的機率」</td><td>機率函數裡每個 X 值對應的機率。</td><td>4.4 會用這張表來算期望值、變異數和標準差。</td></tr>
+                  <tr><th>E(X)</th><td>唸「X 的期望值」</td><td>長期平均會落在哪裡。</td><td>不是直接平均 X 值，而是每個 X 乘上自己的機率後加總。</td></tr>
+                  <tr><th>Var(X)</th><td>唸「X 的變異數」</td><td>結果圍繞期望值的分散程度。</td><td>常用 E(X²) − [E(X)]² 來算，考卷上比較快。</td></tr>
                 </tbody>
               </table>
             </section>
 
             <section class="section">
               <span class="section-label">白話拆解</span>
-              <h2>骰子題先圈結果，先不要急著按計算機</h2>
+              <h2>先判斷題目是在問哪一種分母</h2>
               <ol class="plain-steps">
                 <li>列出全部可能結果。</li>
                 <li>圈出題目要的結果。</li>
                 <li>用「圈到幾個 ÷ 全部幾個」算機率。</li>
                 <li>如果問沒有發生，就用 1 減掉原本機率。</li>
-                <li>如果問獨立事件都發生，就把機率相乘。</li>
+                <li>如果題目說「已知 B」，分母改成 B 裡面的結果。</li>
+                <li>如果問獨立事件都發生，先確認能不能用 P(A)×P(B)。</li>
+                <li>如果給的是 P(X) 表，就檢查機率加總，再算 E(X) 和 Var(X)。</li>
               </ol>
+            </section>
+
+            <section class="section">
+              <span class="section-label">4.2 條件機率與統計獨立</span>
+              <h2>看到「已知」，分母就被縮小了</h2>
+              <p>全班 40 人，修統計 12 人，其中 9 人通過。題目問「已知他修統計，通過的機率」時，分母不是 40，而是修統計的 12 人，所以答案是 9/12。</p>
+              <div class="callout">
+                <p>P(通過 | 修統計) = P(通過且修統計) ÷ P(修統計) = (9/40) ÷ (12/40) = 9/12 = 0.75。</p>
+              </div>
+              <p class="section-intro">獨立事件的判斷也很直：知道 B 發生後，A 的機率如果沒有改變，就可以視為獨立。等價寫法是 P(A 且 B) = P(A)P(B)。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">4.4 機率函數及其特徵值</span>
+              <h2>給你一張 P(X) 表時，不是把 X 直接平均</h2>
+              <p>機率函數要先過兩個基本檢查：每個 P(X) 都在 0 到 1 之間，而且全部加起來等於 1。接著才用每個結果自己的機率去加權。</p>
+              <table>
+                <thead><tr><th>X</th><th>P(X)</th><th>X × P(X)</th><th>X² × P(X)</th></tr></thead>
+                <tbody>
+                  <tr><th>0</th><td>0.2</td><td>0</td><td>0</td></tr>
+                  <tr><th>1</th><td>0.5</td><td>0.5</td><td>0.5</td></tr>
+                  <tr><th>2</th><td>0.3</td><td>0.6</td><td>1.2</td></tr>
+                </tbody>
+              </table>
+              <div class="callout">
+                <p>E(X)=1.1，E(X²)=1.7，Var(X)=1.7−1.1²=0.49，標準差=√0.49=0.7。</p>
+              </div>
             </section>
 
             <section class="section">
@@ -105,15 +144,21 @@
 
             <section class="section">
               <span class="section-label">小練習</span>
-              <h2>先練題目到底在問哪個事件</h2>
-              <div class="quiz-list" data-quiz></div>
+              <h2>練分母、條件和機率函數怎麼判斷</h2>
+              <div class="quiz-list" data-practice></div>
+            </section>
+
+            <section class="section">
+              <span class="section-label">考卷型練習</span>
+              <h2>4.1、4.2、4.4 常見問法</h2>
+              <div class="exam-list" data-exam-drills></div>
             </section>
 
             <section class="section">
               <span class="section-label">常見錯誤</span>
               <h2>看到兩件事，不要反射性相加</h2>
               <div class="mistake">
-                <p>問「A 或 B」才可能用加法；問「A 且 B」通常是在乘。這裡先只處理簡化版本，不往聯合機率和邊際機率展開。</p>
+                <p>問「A 或 B」才可能用加法；問「A 且 B」通常是在乘。這裡只處理考試需要的基本用法，不往聯合機率和邊際機率展開。</p>
               </div>
             </section>
 
@@ -139,6 +184,17 @@
             <label>成功機率 p<input data-sequence-p type="number" min="0" max="1" step="0.01" value="0.3" /></label>
             <label>固定順序，S 是成功、F 是失敗<input data-sequence-text value="SSFFFFFF" /></label>
             <div data-sequence-output aria-live="polite"></div>
+            <h3>條件機率與獨立</h3>
+            <div class="field-grid">
+              <label>P(A)<input data-event-probability type="number" min="0" max="1" step="0.01" value="0.3" /></label>
+              <label>P(B)<input data-condition-probability type="number" min="0" max="1" step="0.01" value="0.5" /></label>
+              <label>P(A 且 B)<input data-intersection-probability type="number" min="0" max="1" step="0.01" value="0.15" /></label>
+            </div>
+            <div data-conditional-output class="result-stack" aria-live="polite"></div>
+            <h3>機率函數特徵值</h3>
+            <label>X 值<input data-distribution-values value="0, 1, 2" /></label>
+            <label>對應 P(X)<input data-distribution-probabilities value="0.2, 0.5, 0.3" /></label>
+            <div data-distribution-output class="result-stack" aria-live="polite"></div>
           </aside>
         </div>
       </main>

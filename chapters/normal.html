@@ -13,7 +13,7 @@
         <nav class="chapter-nav">
           <a href="/index.html" data-nav-link>首頁</a>
           <a href="/chapters/descriptive.html" data-nav-link>描述統計</a>
-          <a href="/chapters/probability.html" data-nav-link>機率基礎</a>
+          <a href="/chapters/probability.html" data-nav-link>機率與函數</a>
           <a href="/chapters/binomial.html" data-nav-link>二項分配</a>
           <a href="/chapters/normal.html" data-nav-link>常態分配</a>
         </nav>
@@ -24,13 +24,18 @@
         <div class="content-grid">
           <article class="article">
             <section class="hero">
-              <span class="eyebrow">常態分配</span>
-              <h1>常態分配先不要把 Z 當答案</h1>
+              <span class="eyebrow">5.3 在常態分配下的機率計算</span>
+              <h1>常態分配不要把 Z 當答案</h1>
               <p>Z 只是位置，不是機率。先算這個分數離平均幾個標準差，再看題目要左邊、右邊，還是兩個數中間。</p>
               <div class="lesson-focus">
                 <span>先記這句</span>
                 <strong>Z 是位置；查表或算面積後，才會得到比例。</strong>
               </div>
+              <ul class="lesson-strip">
+                <li>小於某數：直接拿左側累積面積。</li>
+                <li>大於某數：用 1 減左側累積面積。</li>
+                <li>介於兩數：右邊累積減左邊累積。</li>
+              </ul>
             </section>
 
             <section class="section">
@@ -95,6 +100,17 @@
               <span class="section-label">5. 分步計算</span>
               <h2>右側會把 Z、左側累積和最後面積分開</h2>
               <p class="section-intro">同一個 Z，題目問小於、大於、介於，答案會不一樣。先看方向，再看面積。</p>
+            </section>
+
+            <section class="section">
+              <span class="section-label">5.3 三種機率問法</span>
+              <h2>查表通常給左側，考題常常要你再加工</h2>
+              <div class="formula"><code>P(X &lt; a) = P(Z &lt; z<sub>a</sub>)</code><span>小於某數：把 a 轉成 z<sub>a</sub> 後，直接用左側累積。</span></div>
+              <div class="formula"><code>P(X &gt; a) = 1 − P(Z &lt; z<sub>a</sub>)</code><span>大於某數：右尾面積要用 1 減左側。</span></div>
+              <div class="formula"><code>P(a &lt; X &lt; b) = P(Z &lt; z<sub>b</sub>) − P(Z &lt; z<sub>a</sub>)</code><span>介於兩數：右邊累積面積減左邊累積面積。</span></div>
+              <div class="callout">
+                <p>例：平均 70、標準差 10，求 80 到 90 分之間。z<sub>80</sub>=1，z<sub>90</sub>=2，所以面積約 0.9772−0.8413=0.1359，也就是 13.59%。</p>
+              </div>
             </section>
 
             <section class="section">

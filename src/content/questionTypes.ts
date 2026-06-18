@@ -1,6 +1,7 @@
 export type QuestionType =
   | "描述統計"
   | "機率基礎"
+  | "機率函數"
   | "二項分配"
   | "常態分配"
   | "信賴區間"
@@ -9,6 +10,7 @@ export type QuestionType =
 export const questionTypeOptions: QuestionType[] = [
   "描述統計",
   "機率基礎",
+  "機率函數",
   "二項分配",
   "常態分配",
   "信賴區間",
@@ -40,8 +42,13 @@ export const questionTypeGuides: Record<QuestionType, QuestionTypeGuide> = {
   },
   機率基礎: {
     href: "/chapters/probability.html",
-    label: "機率基礎章節",
+    label: "機率與機率函數章節",
     focus: "樣本空間、補事件、條件機率、獨立事件怎麼分。"
+  },
+  機率函數: {
+    href: "/chapters/probability.html",
+    label: "機率與機率函數章節",
+    focus: "確認 P(X) 加總等於 1，再算 E(X)、Var(X) 和標準差。"
   },
   二項分配: {
     href: "/chapters/binomial.html",
@@ -56,12 +63,12 @@ export const questionTypeGuides: Record<QuestionType, QuestionTypeGuide> = {
   信賴區間: {
     href: "/index.html#concept-map",
     label: "首頁概念地圖",
-    focus: "標準誤、臨界值、樣本平均加減誤差範圍。完整計算器還沒做。"
+    focus: "標準誤、臨界值、樣本平均加減誤差範圍；這裡先用概念地圖辨識題型。"
   },
   假設檢定: {
     href: "/index.html#concept-map",
     label: "首頁概念地圖",
-    focus: "H0／H1、alpha、p-value 跟拒絕區的決策。完整計算器還沒做。"
+    focus: "H0／H1、alpha、p-value 跟拒絕區的決策；這裡先用概念地圖辨識題型。"
   }
 };
 
@@ -136,6 +143,21 @@ export const questionTypeItems: QuestionTypeItem[] = [
     distractors: {
       二項分配: "這題不是固定做 n 次，也沒有問剛好成功 k 次。",
       描述統計: "這題不是整理資料，而是從樣本空間算機率。"
+    }
+  },
+  {
+    id: "probability-function",
+    prompt: "隨機變數 X 的機率函數為 P(0)=0.2、P(1)=0.5、P(2)=0.3，問 E(X) 和 Var(X)。",
+    answer: "機率函數",
+    keywords: ["隨機變數 X", "P(0), P(1), P(2)", "E(X)", "Var(X)"],
+    reason: [
+      "每個 X 值都有對應機率。",
+      "題目要算期望值與變異數。",
+      "要先確認機率加總為 1，再做加權平均。"
+    ],
+    distractors: {
+      機率基礎: "這題不是只圈樣本空間，而是整張 P(X) 表和它的特徵值。",
+      描述統計: "這題沒有給一組實際觀測資料，而是給隨機變數的機率函數。"
     }
   }
 ];

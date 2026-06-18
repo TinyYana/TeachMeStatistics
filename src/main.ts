@@ -12,7 +12,7 @@ import {
 const chapters = [
   { href: "/index.html", label: "首頁" },
   { href: "/chapters/descriptive.html", label: "描述統計" },
-  { href: "/chapters/probability.html", label: "機率基礎" },
+  { href: "/chapters/probability.html", label: "機率與函數" },
   { href: "/chapters/binomial.html", label: "二項分配" },
   { href: "/chapters/normal.html", label: "常態分配" }
 ];
@@ -39,51 +39,6 @@ export function setupLayout(currentPath = window.location.pathname): void {
       window.location.href = select.value;
     });
   }
-}
-
-export function renderQuiz(container: HTMLElement, questions: QuizQuestion[]): void {
-  container.innerHTML = questions
-    .map(
-      (question, questionIndex) => `
-        <div class="quiz-item">
-          <strong>${question.prompt}</strong>
-          <div class="quiz-options" role="group" aria-label="${question.prompt}">
-            ${question.options
-              .map(
-                (option, optionIndex) => `
-                  <button class="ghost" type="button" data-question="${questionIndex}" data-option="${optionIndex}">
-                    ${option.label}
-                  </button>
-                `
-              )
-              .join("")}
-          </div>
-          <div class="feedback" data-feedback="${questionIndex}" aria-live="polite"></div>
-        </div>
-      `
-    )
-    .join("");
-
-  container.addEventListener("click", (event) => {
-    const button = (event.target as HTMLElement).closest<HTMLButtonElement>("button[data-question]");
-    if (!button) {
-      return;
-    }
-    const questionIndex = Number(button.dataset.question);
-    const optionIndex = Number(button.dataset.option);
-    const question = questions[questionIndex];
-    const option = question.options[optionIndex];
-    const buttons = container.querySelectorAll<HTMLButtonElement>(
-      `button[data-question="${questionIndex}"]`
-    );
-    buttons.forEach((item) => item.classList.remove("correct", "wrong"));
-    button.classList.add(option.correct ? "correct" : "wrong");
-    const feedback = container.querySelector<HTMLElement>(`[data-feedback="${questionIndex}"]`);
-    if (feedback) {
-      feedback.className = `feedback ${option.correct ? "good" : "bad"}`;
-      feedback.textContent = option.feedback;
-    }
-  });
 }
 
 export function renderConceptMap(container: HTMLElement, groups: ConceptGroup[]): void {
@@ -361,15 +316,6 @@ export function renderExamDrills(container: HTMLElement, drills: ExamDrill[]): v
       `
     )
     .join("");
-}
-
-export interface QuizQuestion {
-  prompt: string;
-  options: Array<{
-    label: string;
-    correct: boolean;
-    feedback: string;
-  }>;
 }
 
 function normalizePath(path: string): string {

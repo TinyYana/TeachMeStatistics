@@ -1,12 +1,16 @@
 import { fixedSequenceProbability } from "../lib/binomial";
+import { diagnostics } from "../content/diagnostics";
+import { examDrills, practiceSets } from "../content/practice";
 import {
   complementProbability,
   diceEventResults,
   independentJointProbability,
+  summarizeConditionalIndependence,
+  summarizeProbabilityDistribution,
   type DiceEvent
 } from "../lib/probability";
-import { formatNumber, formatPercent } from "../lib/format";
-import { setupLayout, renderQuiz, type QuizQuestion } from "../main";
+import { formatNumber, formatPercent, parseNumberList } from "../lib/format";
+import { renderExamDrills, renderPracticeSet, setupLayout } from "../main";
 
 setupLayout();
 
@@ -20,7 +24,22 @@ const independentOutput = document.querySelector<HTMLElement>("[data-independent
 const sequenceP = document.querySelector<HTMLInputElement>("[data-sequence-p]");
 const sequenceText = document.querySelector<HTMLInputElement>("[data-sequence-text]");
 const sequenceOutput = document.querySelector<HTMLElement>("[data-sequence-output]");
-const quiz = document.querySelector<HTMLElement>("[data-quiz]");
+const eventProbabilityInput = document.querySelector<HTMLInputElement>("[data-event-probability]");
+const conditionProbabilityInput = document.querySelector<HTMLInputElement>(
+  "[data-condition-probability]"
+);
+const intersectionProbabilityInput = document.querySelector<HTMLInputElement>(
+  "[data-intersection-probability]"
+);
+const conditionalOutput = document.querySelector<HTMLElement>("[data-conditional-output]");
+const distributionValuesInput =
+  document.querySelector<HTMLInputElement>("[data-distribution-values]");
+const distributionProbabilitiesInput = document.querySelector<HTMLInputElement>(
+  "[data-distribution-probabilities]"
+);
+const distributionOutput = document.querySelector<HTMLElement>("[data-distribution-output]");
+const practice = document.querySelector<HTMLElement>("[data-practice]");
+const examContainer = document.querySelector<HTMLElement>("[data-exam-drills]");
 
 function renderDice(): void {
   if (!diceSelect || !diceOutput) {
@@ -79,43 +98,106 @@ function renderSequence(): void {
   }
 }
 
+function renderConditional(): void {
+  if (
+    !eventProbabilityInput ||
+    !conditionProbabilityInput ||
+    !intersectionProbabilityInput ||
+    !conditionalOutput
+  ) {
+    return;
+  }
+  const eventProbability = Number(eventProbabilityInput.value);
+  const conditionProbability = Number(conditionProbabilityInput.value);
+  const intersectionProbability = Number(intersectionProbabilityInput.value);
+  try {
+    const result = summarizeConditionalIndependence(
+      eventProbability,
+      conditionProbability,
+      intersectionProbability
+    );
+    const independenceText = result.isIndependent
+      ? "A 且 B 剛好等於 P(A) × P(B)，這組數字可當成獨立事件。"
+      : "A 且 B 不等於 P(A) × P(B)，知道 B 發生後，A 的機率有被改變。";
+    conditionalOutput.innerHTML = `
+      <div class="metric-grid">
+        <div class="metric"><span>P(A|B)</span><strong>${formatNumber(result.conditionalProbability, 4)}</strong></div>
+        <div class="metric"><span>若獨立，P(A)P(B)</span><strong>${formatNumber(result.expectedIntersectionIfIndependent, 4)}</strong></div>
+        <div class="metric"><span>實際 P(A 且 B)</span><strong>${formatNumber(intersectionProbability, 4)}</strong></div>
+      </div>
+      <div class="step-stack">
+        <div class="step-row"><span>1</span><p>P(A|B) = P(A 且 B) ÷ P(B) = ${formatNumber(intersectionProbability, 4)} ÷ ${formatNumber(conditionProbability, 4)} = ${formatNumber(result.conditionalProbability, 4)}。</p></div>
+        <div class="step-row"><span>2</span><p>拿 P(A|B) 和 P(A) 比：${formatNumber(result.conditionalProbability, 4)} ${result.isIndependent ? "=" : "≠"} ${formatNumber(eventProbability, 4)}。</p></div>
+        <div class="step-row"><span>3</span><p>${independenceText}</p></div>
+      </div>
+    `;
+  } catch (error) {
+    conditionalOutput.innerHTML = `<p class="error">${(error as Error).message}</p>`;
+  }
+}
+
+function renderDistribution(): void {
+  if (!distributionValuesInput || !distributionProbabilitiesInput || !distributionOutput) {
+    return;
+  }
+  const values = parseNumberList(distributionValuesInput.value);
+  const probabilities = parseNumberList(distributionProbabilitiesInput.value);
+  try {
+    const result = summarizeProbabilityDistribution(values, probabilities);
+    distributionOutput.innerHTML = `
+      <div class="metric-grid">
+        <div class="metric"><span>ΣP(X)</span><strong>${formatNumber(result.probabilitySum, 4)}</strong></div>
+        <div class="metric"><span>E(X)</span><strong>${formatNumber(result.expectedValue, 4)}</strong></div>
+        <div class="metric"><span>E(X²)</span><strong>${formatNumber(result.expectedSquaredValue, 4)}</strong></div>
+        <div class="metric"><span>Var(X)</span><strong>${formatNumber(result.variance, 4)}</strong></div>
+        <div class="metric"><span>標準差</span><strong>${formatNumber(result.standardDeviation, 4)}</strong></div>
+      </div>
+      <table>
+        <thead><tr><th>X</th><th>P(X)</th><th>X × P(X)</th><th>X² × P(X)</th></tr></thead>
+        <tbody>
+          ${result.rows
+            .map(
+              (row) => `
+                <tr>
+                  <td>${formatNumber(row.value, 4)}</td>
+                  <td>${formatNumber(row.probability, 4)}</td>
+                  <td>${formatNumber(row.weightedValue, 4)}</td>
+                  <td>${formatNumber(row.weightedSquaredValue, 4)}</td>
+                </tr>
+              `
+            )
+            .join("")}
+        </tbody>
+      </table>
+      <p>Var(X) = E(X²) − [E(X)]² = ${formatNumber(result.expectedSquaredValue, 4)} − ${formatNumber(result.expectedValue, 4)}² = ${formatNumber(result.variance, 4)}。</p>
+    `;
+  } catch (error) {
+    distributionOutput.innerHTML = `<p class="error">${(error as Error).message}</p>`;
+  }
+}
+
 diceSelect?.addEventListener("change", renderDice);
 complementInput?.addEventListener("input", renderComplement);
 independentA?.addEventListener("input", renderIndependent);
 independentB?.addEventListener("input", renderIndependent);
 sequenceP?.addEventListener("input", renderSequence);
 sequenceText?.addEventListener("input", renderSequence);
+eventProbabilityInput?.addEventListener("input", renderConditional);
+conditionProbabilityInput?.addEventListener("input", renderConditional);
+intersectionProbabilityInput?.addEventListener("input", renderConditional);
+distributionValuesInput?.addEventListener("input", renderDistribution);
+distributionProbabilitiesInput?.addEventListener("input", renderDistribution);
 renderDice();
 renderComplement();
 renderIndependent();
 renderSequence();
+renderConditional();
+renderDistribution();
 
-if (quiz) {
-  const questions: QuizQuestion[] = [
-    {
-      prompt: "丟一顆公平骰子，出現偶數的機率是多少？",
-      options: [
-        { label: "3/6 = 0.5", correct: true, feedback: "對，偶數是 2、4、6，共 3 個結果。" },
-        { label: "2/6", correct: false, feedback: "偶數不是只有 2，還有 4 和 6。" },
-        { label: "1/6", correct: false, feedback: "1/6 是指定某一個點數的機率。" }
-      ]
-    },
-    {
-      prompt: "命中率是 0.3，沒命中的機率是多少？",
-      options: [
-        { label: "0.7", correct: true, feedback: "對，補事件是 1 - 0.3 = 0.7。" },
-        { label: "0.3", correct: false, feedback: "0.3 是命中，不是沒命中。" },
-        { label: "1.3", correct: false, feedback: "機率不會超過 1。" }
-      ]
-    },
-    {
-      prompt: "兩次獨立投籃都命中，命中率都是 0.3，起手式是什麼？",
-      options: [
-        { label: "0.3 x 0.3", correct: true, feedback: "對，獨立事件同時發生用乘法。" },
-        { label: "0.3 + 0.3", correct: false, feedback: "同時發生不是直接相加。" },
-        { label: "1 - 0.3", correct: false, feedback: "這是在算補事件，不是兩次都命中。" }
-      ]
-    }
-  ];
-  renderQuiz(quiz, questions);
+if (practice) {
+  renderPracticeSet(practice, practiceSets.probability, diagnostics);
+}
+
+if (examContainer) {
+  renderExamDrills(examContainer, examDrills.probability);
 }

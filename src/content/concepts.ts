@@ -96,9 +96,9 @@ export const conceptGroups: ConceptGroup[] = [
       {
         id: "conditional-probability",
         title: "條件機率",
-        solves: "已經知道某件事發生了，再回頭問另一件事的機率。重點是分母從「全部」縮小成「已知的那一群」。",
+        solves: "已知某件事發生後，再回頭問另一件事的機率。重點是分母從「全部」縮小成「已知的那一群」。",
         prerequisites: ["樣本空間", "事件"],
-        questionTypes: ["在某條件下", "已知是男生再問…", "抽出不放回再抽一次"],
+        questionTypes: ["在某條件下", "已知某群人再問…", "抽出不放回再抽一次"],
         nextRelation: "如果多知道一個條件卻完全沒改變機率，那兩件事就是獨立事件。"
       },
       {
@@ -121,6 +121,14 @@ export const conceptGroups: ConceptGroup[] = [
         prerequisites: ["事件", "變數概念"],
         questionTypes: ["X 等於幾", "成功次數", "分數位置"],
         nextRelation: "二項分配和常態分配都會用隨機變數描述題目。"
+      },
+      {
+        id: "probability-function",
+        title: "機率函數",
+        solves: "列出每個 X 值對應的 P(X)，把零散結果整理成一張可以計算的機率表。",
+        prerequisites: ["隨機變數", "機率總和為 1"],
+        questionTypes: ["給 P(X) 表", "檢查機率加總", "由機率表求平均"],
+        nextRelation: "有了 P(X) 之後，就能算期望值、變異數和標準差。"
       },
       {
         id: "expected-value",

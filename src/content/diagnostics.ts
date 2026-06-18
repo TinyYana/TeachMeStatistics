@@ -22,6 +22,34 @@ export const diagnostics: Diagnostic[] = [
     contrastExample: "p = 0.3 時，沒命中不是 0.3，而是 q = 1 - 0.3 = 0.7。"
   },
   {
+    id: "wrong-sample-space",
+    title: "樣本空間抓錯",
+    reason: "只看見題目裡某個數字，沒有先列出所有可能結果。",
+    fix: "先寫出樣本空間，再圈出事件。機率是圈到的結果數除以全部結果數。",
+    contrastExample: "骰子出現偶數是 2、4、6，共 3 個結果；不是只看數字 2。"
+  },
+  {
+    id: "conditional-denominator",
+    title: "條件機率的分母還停在全部",
+    reason: "題目已經說「已知某條件」，但計算時還拿全部樣本空間當分母。",
+    fix: "看到「已知 B」就把分母縮成 B，再問其中有多少也符合 A。",
+    contrastExample: "已知修統計的人有 12 位，其中 9 位通過，P(通過 | 修統計) 是 9/12，不是 9/40。"
+  },
+  {
+    id: "independence-conditional",
+    title: "獨立事件判斷方式錯誤",
+    reason: "把兩個機率是否相同、或事件是否同時出現，誤當成獨立判斷。",
+    fix: "檢查 P(A|B) 是否等於 P(A)，或檢查 P(A 且 B) 是否等於 P(A)P(B)。",
+    contrastExample: "P(A)=0.3、P(B)=0.5、P(A 且 B)=0.15 時，因為 0.15=0.3×0.5，所以可視為獨立。"
+  },
+  {
+    id: "expected-value-weights",
+    title: "期望值沒有照機率加權",
+    reason: "把 X 值直接平均，或只把機率加總，沒有算每個 X 對長期平均的貢獻。",
+    fix: "期望值用 E(X)=ΣxP(x)，每個 X 都要乘上自己的機率。",
+    contrastExample: "X=0,1,2；P(X)=0.2,0.5,0.3 時，E(X)=0×0.2+1×0.5+2×0.3=1.1。"
+  },
+  {
     id: "missing-combination",
     title: "二項分配忘記乘上 C(n,k)",
     reason: "只算到某一種固定順序，沒有把成功位置的所有排法加進來。",
